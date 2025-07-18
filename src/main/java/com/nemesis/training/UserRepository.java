@@ -26,33 +26,35 @@ public class UserRepository {
         this.h2Password = props.getProperty("db.password");
     }
 
+    // create a class that will use JDBC to persist the `User` `name` in the H2 database and return the id
     public long save(User user) throws SQLException {
-        try (Connection conn = DriverManager.getConnection(h2Url, h2Username, h2Password)) {
-            String createTableSQL = "CREATE TABLE IF NOT EXISTS users (" +
-                                    "id BIGINT AUTO_INCREMENT PRIMARY KEY," +
-                                    "name VARCHAR(255) NOT NULL)";
+        try (Connection connection = DriverManager.getConnection(h2Url, h2Username, h2Password)) {
+            createTableIfNotExists(connection);
+            String insertSQL = "INSERT INTO users (name) VALUES (?)";
 
-            try(Statement stmt = conn.createStatement()) {
-                stmt.execute(createTableSQL);
-                String insertSQL = "INSERT INTO users (name) VALUES (?)";
+            try (PreparedStatement insertStatement = connection.prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS)) {
+                insertStatement.setString(1, user.getName());
+                insertStatement.executeUpdate();
 
-                try(PreparedStatement pstmt = conn.prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS)) {
-                    pstmt.setString(1, user.getName());
-                    pstmt.executeUpdate();
-
-                    try(ResultSet rs = pstmt.getGeneratedKeys()) {
-                        if (rs.next()) {
-                            return rs.getLong(1);
-                        } else {
-                            throw new RuntimeException("It was possible to obtain the id");
-                        }
-
+                try (ResultSet generatedKeys = insertStatement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        return generatedKeys.getLong(1);
+                    } else {
+                        throw new RuntimeException("It was not possible to obtain the id");
                     }
+
                 }
             }
         }
-
     }
 
-
+    // Extract createTableSQL to a new method
+    public void createTableIfNotExists(Connection conn) throws SQLException {
+        String createTableSQL = "CREATE TABLE IF NOT EXISTS users (" +
+                "id BIGINT AUTO_INCREMENT PRIMARY KEY," +
+                "name VARCHAR(255) NOT NULL)";
+        try (Statement createTableStatement = conn.createStatement()) {
+            createTableStatement.execute(createTableSQL);
+        }
+    }
 }

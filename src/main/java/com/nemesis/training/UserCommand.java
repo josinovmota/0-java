@@ -28,14 +28,18 @@ public class UserCommand implements Runnable {
         int argumentMinimumLength = 8;
         int argumentMaximumLength = 25;
 
-        // Checks if arguments are in constraints and add wrong ones to validation lists
+        // Checks if arguments are according to the constraints and add wrong ones to validation lists
         for (String username : usernames) {
+            // Checks if the arguments are alphabetic string ( i )
             if (!username.matches("[a-zA-Z]+")) {
                 notAlphabetic.add(username);
+            // Checks if the arguments are in lower-case ( i )
             } else if (!username.matches("[a-z]+")) {
                 notLowerCase.add(username);
+            // Checks if the arguments have a minimum length of 8 characters
             } else if (username.length() < argumentMinimumLength) {
                 undersizedUsernames.add(username);
+                // Checks if the arguments have a maximum length of 8 characters
             } else if (username.length() > argumentMaximumLength) {
                 oversizedUsernames.add(username);
             }
