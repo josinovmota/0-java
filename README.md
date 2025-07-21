@@ -2,9 +2,8 @@
 
 ![0-java-header](assets/SD.png)
 
-Welcome to **0-java**, a repository where I'm doing exercises of the Nemesis Collective Java Training
+Welcome to **0-java**, a repository containing exercises of the Nemesis Collective Java Training.
 
 ## Overview
 
-Here you'll find my attempts to create a program where I receive a username as `argument` and adds it to
-a `h2db`. After adding it, the program should output the username and its own id in the database
+Here you'll find a command-line Java application that takes a username as an argument, stores it in an in-memory H2 database, and prints the username along with its auto-generated ID.

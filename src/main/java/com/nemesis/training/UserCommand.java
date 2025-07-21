@@ -25,7 +25,7 @@ public class UserCommand implements Runnable {
 
             for (String username : usernames) {
                 User user = new User(username);
-                long id = repo.save(user);
+                Long id = repo.save(user);
                 System.out.println("User added: " + username + " (ID: " + id + ")");
             }
 
