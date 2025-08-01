@@ -9,6 +9,6 @@ public class Main {
 
   public static void main(String[] args) {
     System.setProperty(CONFIG_FILE, DB_CONNECTION_FILE);
-    int exitCode = new CommandLine(new UserCommand()).execute(args);
+    new CommandLine(new UserCommand()).execute(args);
   }
 }
