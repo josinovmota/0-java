@@ -32,7 +32,7 @@ public class UsernameValidator {
         // Checks if the arguments have a minimum length of 8 characters
       } else if (username.length() < ARGUMENT_MINIMUM_LENGTH) {
         UNDERSIZED_USERNAMES.add(username);
-        // Checks if the arguments have a maximum length of 8 characters
+        // Checks if the arguments have a maximum length of 25 characters
       } else if (username.length() > ARGUMENT_MAXIMUM_LENGTH) {
         OVERSIZED_USERNAMES.add(username);
       }

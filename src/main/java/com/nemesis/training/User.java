@@ -4,6 +4,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
+import org.h2.util.json.JsonConstructorUtils;
 
 @Getter
 @Setter
