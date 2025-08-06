@@ -23,6 +23,7 @@ public class UserRepository {
       throw new SQLDataException("ERROR: Can't create the table", e);
     }
   }
+
   // create a class that will use JDBC to persist the `User` `name` in the H2 database and return
   // the idcl
   public long save(User user) throws SQLException {
