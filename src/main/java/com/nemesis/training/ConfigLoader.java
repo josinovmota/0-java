@@ -21,7 +21,6 @@ public class ConfigLoader {
   }
 
   public static Properties loadSystemPropertyAndLoad() {
-    String fileName = System.getProperty("config.file", "application.properties");
-    return load(fileName);
+    return load(System.getProperty("config.file", "application.properties"));
   }
 }
