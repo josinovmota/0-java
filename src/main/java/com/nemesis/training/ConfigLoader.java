@@ -15,7 +15,7 @@ public class ConfigLoader {
       }
       props.load(input);
     } catch (IOException e) {
-      throw new UncheckedIOException("ERROR: Error to load: " + fileName, e);
+      throw new UncheckedIOException("ERROR: Error while loading: " + fileName, e);
     }
     return props;
   }
