@@ -2,20 +2,18 @@ package com.nemesis.training;
 
 import java.util.ArrayList;
 import java.util.List;
-import picocli.CommandLine;
 
 public class UsernameValidator {
-  @CommandLine.Parameters List<String> usernames;
 
   static final int ARGUMENT_MINIMUM_LENGTH = 8;
   static final int ARGUMENT_MAXIMUM_LENGTH = 25;
 
-  List<String> NOT_ALPHABETIC = new ArrayList<>();
-  List<String> NOT_LOWER_CASE = new ArrayList<>();
-  List<String> UNDERSIZED_USERNAMES = new ArrayList<>();
-  List<String> OVERSIZED_USERNAMES = new ArrayList<>();
+  static List<String> NOT_ALPHABETIC = new ArrayList<>();
+  static List<String> NOT_LOWER_CASE = new ArrayList<>();
+  static List<String> UNDERSIZED_USERNAMES = new ArrayList<>();
+  static List<String> OVERSIZED_USERNAMES = new ArrayList<>();
 
-  public boolean validate() {
+  public static boolean validate(List<String> usernames) {
     if (usernames == null || usernames.isEmpty()) {
       System.err.println("ERROR: At least one argument must be passed");
       return false;
