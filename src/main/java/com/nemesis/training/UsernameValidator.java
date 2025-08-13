@@ -13,7 +13,7 @@ public class UsernameValidator {
   static List<String> UNDERSIZED_USERNAMES = new ArrayList<>();
   static List<String> OVERSIZED_USERNAMES = new ArrayList<>();
 
-  public static boolean validate(List<String> usernames) {
+  public static boolean isUsernameValid(List<String> usernames) {
     if (usernames == null || usernames.isEmpty()) {
       System.err.println("ERROR: At least one argument must be passed");
       return false;

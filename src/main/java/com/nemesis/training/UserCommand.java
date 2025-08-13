@@ -10,7 +10,7 @@ public class UserCommand implements Runnable {
   @CommandLine.Parameters List<String> usernames;
 
   public void run() {
-    boolean hasErrors = UsernameValidator.validate(usernames);
+    boolean hasErrors = UsernameValidator.isUsernameValid(usernames);
 
     if (hasErrors) {
       return;
