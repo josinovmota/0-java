@@ -20,7 +20,7 @@ public class UserRepository {
     try (Connection connection = DriverManager.getConnection(h2Url, h2Username, h2Password)) {
       createTableIfNotExists(connection);
     } catch (SQLException e) {
-      throw new SQLDataException("ERROR: Can't create the table", e);
+      throw new SQLDataException("ERROR: Can't create the table `users`", e);
     }
   }
 
