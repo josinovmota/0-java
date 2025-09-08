@@ -14,6 +14,11 @@ public class ConfigLoader {
         throw new IllegalArgumentException("ERROR: File not found: " + fileName);
       }
       props.load(input);
+
+      if (props.isEmpty()) {
+        throw new IllegalStateException("ERROR: Properties file is empty: " + fileName);
+      }
+
     } catch (IOException e) {
       throw new UncheckedIOException("ERROR: Error while loading: " + fileName, e);
     }

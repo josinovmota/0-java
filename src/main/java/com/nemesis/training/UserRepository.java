@@ -52,7 +52,7 @@ public class UserRepository {
     String createTableSQL =
         "CREATE TABLE IF NOT EXISTS users ("
             + "id BIGINT AUTO_INCREMENT PRIMARY KEY,"
-            + "name VARCHAR(255) NOT NULL)";
+            + "name VARCHAR(26) NOT NULL)";
     try (Statement createTableStatement = conn.createStatement()) {
       createTableStatement.execute(createTableSQL);
     }
