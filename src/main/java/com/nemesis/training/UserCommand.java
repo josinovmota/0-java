@@ -23,7 +23,7 @@ public class UserCommand implements Runnable {
       for (String username : usernames) {
         User user = new User(username);
         Long id = repo.save(user);
-        System.out.println("User added: " + username + " (ID: " + id + ")");
+        System.out.println("Username added: " + username + " (ID: " + id + ")");
       }
 
     } catch (SQLException e) {

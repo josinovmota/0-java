@@ -20,14 +20,14 @@ public class UserRepository {
     try (Connection connection = DriverManager.getConnection(h2Url, h2Username, h2Password)) {
       createTableIfNotExists(connection);
     } catch (SQLException e) {
-      throw new SQLDataException("ERROR: Can't create the table `users`", e);
+      throw new SQLDataException("ERROR: Can't create the table `usernames`", e);
     }
   }
 
   // create a class that will use JDBC to persist the `User` `name` in the H2 database and return
   // the idcl
   public long save(User user) throws SQLException {
-    String insertSQL = "INSERT INTO users (name) VALUES (?)";
+    String insertSQL = "INSERT INTO users (username) VALUES (?)";
 
     try (Connection connection = DriverManager.getConnection(h2Url, h2Username, h2Password)) {
 
@@ -52,7 +52,7 @@ public class UserRepository {
     String createTableSQL =
         "CREATE TABLE IF NOT EXISTS users ("
             + "id BIGINT AUTO_INCREMENT PRIMARY KEY,"
-            + "name VARCHAR(26) NOT NULL)";
+            + "username VARCHAR(26) NOT NULL)";
     try (Statement createTableStatement = conn.createStatement()) {
       createTableStatement.execute(createTableSQL);
     }
