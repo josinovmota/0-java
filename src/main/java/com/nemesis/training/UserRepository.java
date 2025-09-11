@@ -10,10 +10,14 @@ public class UserRepository {
   private String h2Password;
 
   public UserRepository() throws SQLSyntaxErrorException {
-    Properties props = ConfigLoader.loadSystemPropertyAndLoad();
-    this.h2Url = props.getProperty("db.url");
-    this.h2Username = props.getProperty("db.username");
-    this.h2Password = props.getProperty("db.password");
+    try {
+        Properties props = ConfigLoader.loadSystemPropertyAndLoad();
+        this.h2Url = props.getProperty("db.url");
+        this.h2Username = props.getProperty("db.username");
+        this.h2Password = props.getProperty("db.password");
+    } catch (IllegalArgumentException | IllegalStateException e) {
+        throw new SQLSyntaxErrorException("Configuration error in database properties", e);
+    }
   }
 
   public void connect() throws SQLException {

@@ -17,10 +17,4 @@ class MainTest {
     // Arrange
     assertEquals("application.properties", System.getProperty("config.file"));
   }
-
-  @Test
-  void mustCreateNewUserCommandWhenExecuteArgsInto() {
-    // Arrange
-    String[] args = {"josinobereteu", "guilhermelegal"};
-  }
 }
