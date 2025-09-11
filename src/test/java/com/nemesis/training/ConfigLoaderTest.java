@@ -37,16 +37,27 @@ class ConfigLoaderTest {
     assertThrows(IllegalStateException.class, () -> ConfigLoader.load(fileName));
   }
 
-  @Test
-  void mustGetPropertiesFromApplicationPropertiesWhenGetPropertyIsCalled() {
-    // Arrange
-    System.setProperty("config.file", "application.properties");
+    @Test
+    void mustReturnNonNullPropertiesWhenGetPropertyIsCalled() {
+        // Arrange
+        System.setProperty("config.file", "application.properties");
 
-    // Act
-    Properties props = ConfigLoader.loadSystemPropertyAndLoad();
+        // Act
+        Properties props = ConfigLoader.loadSystemPropertyAndLoad();
 
-    // Assert
-    assertNotNull(props);
-    assertFalse(props.isEmpty());
-  }
+        // Assert
+        assertNotNull(props);
+    }
+
+    @Test
+    void mustReturnNonEmptyPropertiesWhenGetPropertyIsCalled() {
+        // Arrange
+        System.setProperty("config.file", "application.properties");
+
+        // Act
+        Properties props = ConfigLoader.loadSystemPropertyAndLoad();
+
+        // Assert
+        assertFalse(props.isEmpty());
+    }
 }
