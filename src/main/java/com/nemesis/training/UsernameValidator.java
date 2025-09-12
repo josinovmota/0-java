@@ -28,10 +28,10 @@ public class UsernameValidator {
       } else if (!username.matches("[a-z]+")) {
         NOT_LOWER_CASE.add(username);
         // Checks if the arguments have a minimum length of 8 characters
-      } else if (username.length() < ARGUMENT_MINIMUM_LENGTH) {
+      } else if (!username.matches("^.{8,}$")) {
         UNDERSIZED_USERNAMES.add(username);
         // Checks if the arguments have a maximum length of 25 characters
-      } else if (username.length() > ARGUMENT_MAXIMUM_LENGTH) {
+      } else if (!username.matches("^.{0,25}$")) {
         OVERSIZED_USERNAMES.add(username);
       }
     }
