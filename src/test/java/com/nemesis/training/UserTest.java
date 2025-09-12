@@ -2,32 +2,31 @@ package com.nemesis.training;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class UserTest {
 
-  @Test
-  void mustCreateUserWhenUserIsPassed() {
-    // Arrange
-    String name = "Tiberius";
+  private User user;
+  private final String name = "Tiberius";
 
-    // Act
-    User user = new User(name);
-
-    // Assert
-    assertEquals(name, user.getName());
+  @BeforeEach
+  void setUp() {
+      user = new User(name);
   }
 
   @Test
-  void mustSetIdAndUsernameWhenIdAndUsernameIsPassed() {
-    // Arrange
-    User user = new User("Tiberius");
-
+  void mustSetIdWhenIdIsPassed() {
     // Act
     user.setId(1L);
 
     // Assert
     assertEquals(1L, user.getId());
+  }
+
+  @Test
+  void mustSetUsernameWhenUsernameIsPassed() {
+    // Assert
     assertEquals("Tiberius", user.getName());
   }
 }
