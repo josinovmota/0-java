@@ -8,10 +8,11 @@ import org.junit.jupiter.api.Test;
 class UserTest {
 
   private User user;
-  private final String name = "Tiberius";
+  private String name;
 
   @BeforeEach
   void setUp() {
+      name = "Tiberius";
       user = new User(name);
   }
 
