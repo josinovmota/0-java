@@ -3,18 +3,19 @@ package com.nemesis.training;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import picocli.CommandLine;
 
 class MainTest {
 
   @Test
-  void mustReturnRightPropertyWhenCalled() {
+  void mustExecuteMainWhenArgsArePassed() {
     // Arrange
     String[] args = {"josinobereteu", "guilhermelegal"};
 
     // Act
-    Main.main(args);
+    int testMain = new CommandLine(new UserCommand()).execute(args);
 
     // Arrange
-    assertEquals("application.properties", System.getProperty("config.file"));
+    assertEquals(0, testMain);
   }
 }
