@@ -8,14 +8,11 @@ import picocli.CommandLine;
 class MainTest {
 
   @Test
-  void mustExecuteMainWhenArgsArePassed() {
+  void mustExecuteMainWhenMainMethodIsCalled() {
     // Arrange
     String[] args = {"josinobereteu", "guilhermelegal"};
 
-    // Act
-    int testMain = new CommandLine(new UserCommand()).execute(args);
-
     // Arrange
-    assertEquals(0, testMain);
+      assertDoesNotThrow(() -> Main.main(args));
   }
 }

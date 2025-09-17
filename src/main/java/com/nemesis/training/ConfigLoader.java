@@ -2,7 +2,6 @@ package com.nemesis.training;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UncheckedIOException;
 import java.util.Properties;
 
 public class ConfigLoader {
@@ -20,7 +19,7 @@ public class ConfigLoader {
       }
 
     } catch (IOException e) {
-      throw new UncheckedIOException("ERROR: Error while loading: " + fileName, e);
+      throw new ConfigFileException("ERROR: Error while loading: " + fileName, e);
     }
     return props;
   }
