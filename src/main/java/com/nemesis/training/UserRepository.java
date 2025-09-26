@@ -9,15 +9,14 @@ public class UserRepository {
   private String h2Username;
   private String h2Password;
 
-  public UserRepository() throws SQLSyntaxErrorException {
-    try {
-        Properties props = ConfigLoader.loadSystemPropertyAndLoad();
-        this.h2Url = props.getProperty("db.url");
-        this.h2Username = props.getProperty("db.username");
-        this.h2Password = props.getProperty("db.password");
-    } catch (IllegalArgumentException | IllegalStateException e) {
-        throw new SQLSyntaxErrorException("Configuration error in database properties", e);
-    }
+  public UserRepository(Properties props) {
+    this.h2Url = props.getProperty("db.url");
+    this.h2Username = props.getProperty("db.username");
+    this.h2Password = props.getProperty("db.password");
+  }
+
+  public UserRepository() throws ConfigFileException {
+    this(ConfigLoader.loadSystemPropertyAndLoad());
   }
 
   public void connect() throws SQLException {
@@ -28,8 +27,6 @@ public class UserRepository {
     }
   }
 
-  // create a class that will use JDBC to persist the `User` `name` in the H2 database and return
-  // the idcl
   public long save(User user) throws SQLException {
     String insertSQL = "INSERT INTO users (username) VALUES (?)";
 
@@ -44,14 +41,13 @@ public class UserRepository {
           if (generatedKeys.next()) {
             return generatedKeys.getLong(1);
           } else {
-            throw new SQLDataException("It was not possible to obtain the id");
+            throw new SQLDataException("ERROR: It was not possible to obtain the id");
           }
         }
       }
     }
   }
 
-  // Extract createTableSQL to a new method
   public void createTableIfNotExists(Connection conn) throws SQLException {
     String createTableSQL =
         "CREATE TABLE IF NOT EXISTS users ("

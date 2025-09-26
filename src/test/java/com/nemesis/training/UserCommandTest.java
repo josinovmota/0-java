@@ -2,30 +2,24 @@ package com.nemesis.training;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 class UserCommandTest {
 
   @Test
   void mustReturnNothingWhenUserIsInvalid() {
-    // Arrange
-    UserCommand user = new UserCommand();
-    user.usernames = new ArrayList<>();
-    user.usernames.add("a");
+    UserCommand cmd = new UserCommand();
+    String[] args = {"a"};
 
-    // Act + Assert
-    assertThrows(IllegalArgumentException.class, () -> user.run());
+    assertThrows(IllegalArgumentException.class, () -> cmd.run(args));
   }
 
   @Test
   void mustReturnNothingWhenUserIsValid() {
-    // Arrange
-    UserCommand user = new UserCommand();
-    user.usernames = new ArrayList<>();
-    user.usernames.add("josinobereteu");
+    UserCommand cmd = new UserCommand();
+    String[] args = {"josinobereteu"};
 
     // Act + Assert
-    assertDoesNotThrow(() -> user.run());
+    assertDoesNotThrow(() -> cmd.run(args));
   }
 }

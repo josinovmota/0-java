@@ -12,22 +12,32 @@ class UserTest {
 
   @BeforeEach
   void setUp() {
-      name = "Tiberius";
-      user = new User(name);
+    name = "Tiberius";
+    user = new User(name);
+    user.setId(1L);
   }
 
   @Test
-  void mustSetIdWhenIdIsPassed() {
-    // Act
-    user.setId(1L);
-
-    // Assert
+  void mustReturnIdWhenGetIdIsUsed() {
     assertEquals(1L, user.getId());
   }
 
   @Test
-  void mustSetUsernameWhenUsernameIsPassed() {
-    // Assert
+  void mustCreateUserWithCorrectNameWhenNameIsPassed() {
     assertEquals("Tiberius", user.getName());
+  }
+
+  @Test
+  void mustSetIdWhenSetIdIsUsed() {
+    user.setId(2L);
+
+    assertEquals(2L, user.getId());
+  }
+
+  @Test
+  void setName() {
+    user.setName("Josino");
+
+    assertEquals("Josino", user.getName());
   }
 }

@@ -5,10 +5,7 @@ import java.util.List;
 
 public class UsernameValidator {
 
-  static final int ARGUMENT_MINIMUM_LENGTH = 8;
-  static final int ARGUMENT_MAXIMUM_LENGTH = 25;
-
-  public static boolean isUsernameValid(List<String> usernames) {
+  public static boolean isUsernameInvalid(List<String> usernames) {
 
     List<String> NOT_ALPHABETIC = new ArrayList<>();
     List<String> NOT_LOWER_CASE = new ArrayList<>();

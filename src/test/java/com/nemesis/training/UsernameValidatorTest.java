@@ -4,60 +4,69 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class UsernameValidatorTest {
 
+  private List<String> usernames;
+
+  @BeforeEach
+  void setUp() {
+    usernames = new ArrayList<>();
+  }
+
   @Test
   void mustValidateUsernameWhenUsernameIsValid() {
-    List<String> usernames = new ArrayList<>();
     usernames.add("josinobereteu");
     usernames.add("guilhermepapao");
 
-    assertFalse(UsernameValidator.isUsernameValid(usernames));
+    assertFalse(UsernameValidator.isUsernameInvalid(usernames));
   }
 
   @Test
   void mustInvalidateUsernameWhenUsernameIsEmpty() {
-    List<String> usernames = new ArrayList<>();
+    assertThrows(
+        IllegalArgumentException.class, () -> UsernameValidator.isUsernameInvalid(usernames));
+  }
+
+  @Test
+  void mustInvalidateUsernameWhenUsernameIsNull() {
+    usernames = null;
 
     assertThrows(
-        IllegalArgumentException.class, () -> UsernameValidator.isUsernameValid(usernames));
+        IllegalArgumentException.class, () -> UsernameValidator.isUsernameInvalid(usernames));
   }
 
   @Test
   void mustInvalidateUsernameWhenUsernameIsNotAlphabetic() {
-    List<String> usernames = new ArrayList<>();
-    usernames.add("1235423");
+    usernames.add("12346326");
 
     assertThrows(
-        IllegalArgumentException.class, () -> UsernameValidator.isUsernameValid(usernames));
+        IllegalArgumentException.class, () -> UsernameValidator.isUsernameInvalid(usernames));
   }
 
   @Test
-  void mustInvalidateUsernameWhenUsernameIsUpperCase() {
-    List<String> usernames = new ArrayList<>();
-    usernames.add("GUILHERMEPAPAO");
+  void mustInvalidateUsernameWhenUsernameIsNotLowerCase() {
+    usernames.add("GERALDAO");
 
     assertThrows(
-        IllegalArgumentException.class, () -> UsernameValidator.isUsernameValid(usernames));
+        IllegalArgumentException.class, () -> UsernameValidator.isUsernameInvalid(usernames));
   }
 
   @Test
-  void mustInvalidateUsernameWhenUsernameHasLessThanMinimumCharacters() {
-    List<String> usernames = new ArrayList<>();
-    usernames.add("gui");
+  void mustInvalidateUsernameWhenUsernameIsUndersized() {
+    usernames.add("ana");
 
     assertThrows(
-        IllegalArgumentException.class, () -> UsernameValidator.isUsernameValid(usernames));
+        IllegalArgumentException.class, () -> UsernameValidator.isUsernameInvalid(usernames));
   }
 
   @Test
-  void mustInvalidateUsernameWhenUsernameHasMoreThanMaximumCharacters() {
-    List<String> usernames = new ArrayList<>();
-    usernames.add("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+  void mustInvalidateUsernameWhenUsernameIsOversized() {
+    usernames.add("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
     assertThrows(
-        IllegalArgumentException.class, () -> UsernameValidator.isUsernameValid(usernames));
+        IllegalArgumentException.class, () -> UsernameValidator.isUsernameInvalid(usernames));
   }
 }
