@@ -40,6 +40,14 @@
       <scope>test</scope>
     </dependency>
 
+    <!-- com.github.stefanbirkner-lambda -->
+    <dependency>
+      <groupId>com.github.stefanbirkner</groupId>
+      <artifactId>system-lambda</artifactId>
+      <version>1.2.1</version>
+      <scope>test</scope>
+    </dependency>
+
     <!-- JUnit 5 (Jupiter) -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>

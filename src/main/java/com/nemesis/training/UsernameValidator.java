@@ -7,10 +7,10 @@ public class UsernameValidator {
 
   public static boolean isUsernameInvalid(List<String> usernames) {
 
-    List<String> NOT_ALPHABETIC = new ArrayList<>();
-    List<String> NOT_LOWER_CASE = new ArrayList<>();
-    List<String> UNDERSIZED_USERNAMES = new ArrayList<>();
-    List<String> OVERSIZED_USERNAMES = new ArrayList<>();
+    List<String> notAlphabetic = new ArrayList<>();
+    List<String> notLowerCase = new ArrayList<>();
+    List<String> undersizedUsernames = new ArrayList<>();
+    List<String> oversizedUsernames = new ArrayList<>();
 
     if (usernames == null || usernames.isEmpty()) {
       throw new IllegalArgumentException("ERROR: At least one argument must be passed");
@@ -20,16 +20,16 @@ public class UsernameValidator {
     for (String username : usernames) {
       // Checks if the arguments are alphabetic string ( i )
       if (!username.matches("[a-zA-Z]+")) {
-        NOT_ALPHABETIC.add(username);
+        notAlphabetic.add(username);
         // Checks if the arguments are in lower-case ( i )
       } else if (!username.matches("[a-z]+")) {
-        NOT_LOWER_CASE.add(username);
+        notLowerCase.add(username);
         // Checks if the arguments have a minimum length of 8 characters
-      } else if (!username.matches("^.{8,}$")) {
-        UNDERSIZED_USERNAMES.add(username);
+      } else if (username.length() < 8) {
+        undersizedUsernames.add(username);
         // Checks if the arguments have a maximum length of 25 characters
-      } else if (!username.matches("^.{0,25}$")) {
-        OVERSIZED_USERNAMES.add(username);
+      } else if (username.length() > 25) {
+        oversizedUsernames.add(username);
       }
     }
 
@@ -37,33 +37,33 @@ public class UsernameValidator {
     boolean hasErrors = false;
 
     // Raises an error if there are non-alphabetic arguments being passed
-    if (!NOT_ALPHABETIC.isEmpty()) {
+    if (!notAlphabetic.isEmpty()) {
       hasErrors = true;
       throw new IllegalArgumentException(
-          "ERROR: These arguments are not alphabetic: " + NOT_ALPHABETIC);
+          "ERROR: These arguments are not alphabetic: " + notAlphabetic);
     }
 
     // Raises an error if there are non-lowercase arguments being passed
-    if (!NOT_LOWER_CASE.isEmpty()) {
+    if (!notLowerCase.isEmpty()) {
       hasErrors = true;
       throw new IllegalArgumentException(
-          "ERROR: These arguments must be lowercase: " + NOT_LOWER_CASE);
+          "ERROR: These arguments must be lowercase: " + notLowerCase);
     }
 
     // Raises an error if there are undersized arguments being passed
-    if (!UNDERSIZED_USERNAMES.isEmpty()) {
+    if (!undersizedUsernames.isEmpty()) {
       hasErrors = true;
       throw new IllegalArgumentException(
           "ERROR: These arguments must have a minimum length of 8 characters: "
-              + UNDERSIZED_USERNAMES);
+              + undersizedUsernames);
     }
 
     // Raises an error if there are oversized arguments being passed
-    if (!OVERSIZED_USERNAMES.isEmpty()) {
+    if (!oversizedUsernames.isEmpty()) {
       hasErrors = true;
       throw new IllegalArgumentException(
           "ERROR: These arguments must have a maximum length of 25 characters: "
-              + OVERSIZED_USERNAMES);
+              + oversizedUsernames);
     }
 
     return hasErrors;
