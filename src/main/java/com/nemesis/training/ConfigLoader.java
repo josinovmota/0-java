@@ -1,26 +1,36 @@
 package com.nemesis.training;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.UncheckedIOException;
 import java.util.Properties;
 
 public class ConfigLoader {
-  public static Properties load(String fileName) {
+
+  public static Properties load(String fileName) throws ConfigFileException {
+    if (fileName == null || fileName.isBlank()) {
+      throw new IllegalArgumentException("ERROR: File name must not be null or empty");
+    }
+
     Properties props = new Properties();
 
     try (InputStream input = ConfigLoader.class.getClassLoader().getResourceAsStream(fileName)) {
       if (input == null) {
-        throw new IllegalArgumentException("ERROR: File not found: " + fileName);
+        throw new ConfigFileException("ERROR: File not found: " + fileName);
       }
+
       props.load(input);
-    } catch (IOException e) {
-      throw new UncheckedIOException("ERROR: Error while loading: " + fileName, e);
+
+      if (props.isEmpty()) {
+        throw new IllegalStateException("ERROR: Properties file is empty: " + fileName);
+      }
+
+    } catch (Exception e) {
+      throw new ConfigFileException("ERROR: Unexpected error while loading: " + fileName, e);
     }
+
     return props;
   }
 
-  public static Properties loadSystemPropertyAndLoad() {
+  public static Properties loadSystemPropertyAndLoad() throws ConfigFileException {
     return load(System.getProperty("config.file", "application.properties"));
   }
 }
