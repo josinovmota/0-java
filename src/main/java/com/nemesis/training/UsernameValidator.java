@@ -15,17 +15,17 @@ public class UsernameValidator {
     List<String> oversizedUsernames = new ArrayList<>();
 
     if (usernames == null || usernames.isEmpty()) {
-      log.error("List of usernames is Empty or Null - at least one username is required ");
+      log.error("List of usernames is empty or null - at least one username is required ");
       throw new IllegalArgumentException("ERROR: At least one argument must be passed");
     }
 
     // Checks if arguments are according to the constraints and add wrong ones to validation lists
     for (String username : usernames) {
-      // Checks if the arguments are alphabetic string ( i )
+      // Checks if the arguments are alphabetic strings
       if (!username.matches("[a-zA-Z]+")) {
         log.debug("The username {} is not alphabetic", username);
         notAlphabetic.add(username);
-        // Checks if the arguments are in lower-case ( i )
+        // Checks if the arguments are in lower-case
       } else if (!username.matches("[a-z]+")) {
         log.debug("The username {} is not in lowercase", username);
         notLowerCase.add(username);

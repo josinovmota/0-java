@@ -25,7 +25,7 @@ public class UserCommand {
       User user = new User(username);
       Long id = repo.save(user);
       // System.out.println("Username added: " + username + " (ID: " + id + ")");
-      log.info("Username added: {} ID: {}", username, id);
+      log.info("Username: {} added with ID: {}", username, id);
     }
   }
 }
