@@ -2,7 +2,9 @@ package com.nemesis.training;
 
 import java.util.ArrayList;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class UsernameValidator {
 
   public static boolean isUsernameInvalid(List<String> usernames) {
@@ -13,22 +15,27 @@ public class UsernameValidator {
     List<String> oversizedUsernames = new ArrayList<>();
 
     if (usernames == null || usernames.isEmpty()) {
+      log.error("List of usernames is empty or null - at least one username is required ");
       throw new IllegalArgumentException("ERROR: At least one argument must be passed");
     }
 
     // Checks if arguments are according to the constraints and add wrong ones to validation lists
     for (String username : usernames) {
-      // Checks if the arguments are alphabetic string ( i )
+      // Checks if the arguments are alphabetic strings
       if (!username.matches("[a-zA-Z]+")) {
+        log.debug("The username {} is not alphabetic", username);
         notAlphabetic.add(username);
-        // Checks if the arguments are in lower-case ( i )
+        // Checks if the arguments are in lower-case
       } else if (!username.matches("[a-z]+")) {
+        log.debug("The username {} is not in lowercase", username);
         notLowerCase.add(username);
         // Checks if the arguments have a minimum length of 8 characters
       } else if (username.length() < 8) {
+        log.debug("The username {} is undersized - less than minimum 8 characters", username);
         undersizedUsernames.add(username);
         // Checks if the arguments have a maximum length of 25 characters
       } else if (username.length() > 25) {
+        log.debug("The username {} is oversized - more than maximum 25 characters", username);
         oversizedUsernames.add(username);
       }
     }
@@ -39,6 +46,7 @@ public class UsernameValidator {
     // Raises an error if there are non-alphabetic arguments being passed
     if (!notAlphabetic.isEmpty()) {
       hasErrors = true;
+      log.error("There was non-alphabetic usernames in the list");
       throw new IllegalArgumentException(
           "ERROR: These arguments are not alphabetic: " + notAlphabetic);
     }
@@ -46,6 +54,7 @@ public class UsernameValidator {
     // Raises an error if there are non-lowercase arguments being passed
     if (!notLowerCase.isEmpty()) {
       hasErrors = true;
+      log.error("There was non-lowercase usernames in the list");
       throw new IllegalArgumentException(
           "ERROR: These arguments must be lowercase: " + notLowerCase);
     }
@@ -53,6 +62,7 @@ public class UsernameValidator {
     // Raises an error if there are undersized arguments being passed
     if (!undersizedUsernames.isEmpty()) {
       hasErrors = true;
+      log.error("There was undersized usernames in the list - less than minimum 8 characters");
       throw new IllegalArgumentException(
           "ERROR: These arguments must have a minimum length of 8 characters: "
               + undersizedUsernames);
@@ -61,6 +71,7 @@ public class UsernameValidator {
     // Raises an error if there are oversized arguments being passed
     if (!oversizedUsernames.isEmpty()) {
       hasErrors = true;
+      log.error("There was oversized usernames in the list - more than maximum 25 characters");
       throw new IllegalArgumentException(
           "ERROR: These arguments must have a maximum length of 25 characters: "
               + oversizedUsernames);

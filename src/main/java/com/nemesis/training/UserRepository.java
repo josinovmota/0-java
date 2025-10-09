@@ -2,8 +2,10 @@ package com.nemesis.training;
 
 import java.sql.*;
 import java.util.Properties;
+import lombok.extern.slf4j.Slf4j;
 
-public class UserRepository {
+@Slf4j
+public final class UserRepository {
 
   private String h2Url;
   private String h2Username;
@@ -20,9 +22,11 @@ public class UserRepository {
   }
 
   public void connect() throws SQLException {
+    log.info("Connecting to the in-memory h2 database");
     try (Connection connection = DriverManager.getConnection(h2Url, h2Username, h2Password)) {
       createTableIfNotExists(connection);
     } catch (SQLException e) {
+      log.error("The `users` table was not able to be created");
       throw new SQLDataException("ERROR: Can't create the table `users`", e);
     }
   }
@@ -41,7 +45,9 @@ public class UserRepository {
           if (generatedKeys.next()) {
             return generatedKeys.getLong(1);
           } else {
-            throw new SQLDataException("ERROR: It was not possible to obtain the id");
+            log.error("Failed to generate for the user: {}", user.getName());
+            throw new SQLDataException(
+                "ERROR: It was not possible to obtain the id for the user: " + user.getName());
           }
         }
       }

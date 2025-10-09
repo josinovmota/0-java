@@ -36,13 +36,13 @@ class ConfigLoaderTest {
   }
 
   @Test
-  void shouldThrowIllegalStateExceptionWhenFileIsEmpty() {
+  void mustThrowIllegalStateExceptionWhenFileIsEmpty() {
     // Arrange
     String fileName = "empty.properties";
 
     // Act + Assert
     assertThrows(
-        ConfigFileException.class,
+        IllegalStateException.class,
         () -> {
           ConfigLoader.load(fileName);
         });

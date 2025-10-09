@@ -1,7 +1,9 @@
 package com.nemesis.training;
 
 import java.sql.SQLException;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class Main {
 
   private static final String CONFIG_FILE = "config.file";
@@ -13,13 +15,13 @@ public class Main {
       new UserCommand().run(args);
       return 0;
     } catch (ConfigFileException e) {
-      System.err.println("Config file problem: " + e.getMessage());
+      log.error("Config file problem: {}", e.getMessage());
       return 1;
     } catch (SQLException e) {
-      System.err.println("Database problem: " + e.getMessage());
+      log.error("Database problem: {}", e.getMessage());
       return 2;
     } catch (IllegalArgumentException | IllegalStateException e) {
-      System.err.println("Input/Validation problem: " + e.getMessage());
+      log.error("Input/Validation problem: {}", e.getMessage());
       return 3;
     }
   }
