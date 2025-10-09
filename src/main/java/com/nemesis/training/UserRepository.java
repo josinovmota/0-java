@@ -45,8 +45,9 @@ public final class UserRepository {
           if (generatedKeys.next()) {
             return generatedKeys.getLong(1);
           } else {
-            log.error("It was not possible to obtain the id");
-            throw new SQLDataException("ERROR: It was not possible to obtain the id");
+            log.error("Failed to generate for the user: {}", user.getName());
+            throw new SQLDataException(
+                "ERROR: It was not possible to obtain the id for the user: " + user.getName());
           }
         }
       }
