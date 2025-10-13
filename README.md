@@ -33,3 +33,41 @@ Here you'll find a command-line Java application that takes a username as an arg
 ### How can Maven produce a dependency graph?
 
 [Explanation](./exercises/dependency-graph.md)
+
+## Building the project
+
+In order to build the project, you can use the [how to build the project](./docs/building.md) guide.
+
+## Testing
+
+To run the tests, refer to the [running tests](./docs/testing.md) guide.
+
+## Executing the project
+
+To execute the project you can simply use the following command:
+
+Windows (PowerShell)
+```
+mvn "exec:java" "-Dexec.args=<args separated with spaces>"
+```
+
+Linux (Bash)
+```
+mvn exec:java -Dexec.args="<args separated with spaces>"
+```
+
+## Sorting the POM
+
+To sort the `pom.xml` file you should use the following command:
+
+```
+mvn sortpom:sort
+```
+
+## Formatting code
+
+To format the code you can use the following command:
+
+```
+mvn fmt:format
+```

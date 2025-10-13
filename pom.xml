@@ -91,6 +91,16 @@
         </configuration>
       </plugin>
 
+      <!-- Exec Plugin -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.6.1</version>
+        <configuration>
+          <mainClass>com.nemesis.training.Main</mainClass>
+        </configuration>
+      </plugin>
+
       <!-- Surefire -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -124,6 +134,19 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+
+      <!-- PMD -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>3.27.0</version>
+        <configuration>
+          <rulesets>
+            <ruleset>/rulesets/java/braces.xml</ruleset>
+            <ruleset>/rulesets/java/naming.xml</ruleset>
+          </rulesets>
+        </configuration>
       </plugin>
 
       <!-- Spotbugs -->
