@@ -36,11 +36,39 @@ Here you'll find a command-line Java application that takes a username as an arg
 
 ## Building the project
 
-In order to build the project, you can use the [how to build the project](./docs/building.md) guide.
+First of all, ensure that you're currently using the [JDK 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html), [Git](https://git-scm.com/downloads), and [Apache Maven](https://maven.apache.org/) installed. You can check JDK, Git and Apache Maven version by using the following commands:
+
+
+```
+java -version
+git --version
+mvn -- version
+```
+
+Now we can start building the project. The first thing in order to do that is cloning the repository:
+
+```
+git clone https://github.com/josinovmota/0-java
+cd 0-java
+```
+
+After that you can use the `mvn clean install` command:
+
+```
+mvn clean install
+```
 
 ## Testing
 
-To run the tests, refer to the [running tests](./docs/testing.md) guide.
+First of all be sure that you already downloaded the project (you can use the first part of the [Building the project](#building-the-project) in order to do that) so we can start doing the **unit tests**
+
+Now, with everything settled we can properly do the unit tests with its command:
+
+```
+mvn test
+```
+
+If there's any doubt about Apache Maven lifecycle, you can use the [explanation](../exercises/maven-lifecycle.md) about its phases.
 
 ## Executing the project
 
