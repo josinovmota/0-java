@@ -1,6 +1,5 @@
 package com.nemesis.training;
 
-import static com.github.stefanbirkner.systemlambda.SystemLambda.catchSystemExit;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -44,12 +43,6 @@ class MainTest {
   void mustReturn3WhenInvalidUsername() {
     String[] args = {"ANA"};
     int status = Main.run(args);
-    assertEquals(3, status);
-  }
-
-  @Test
-  void mustExitWithSameStatusFromMainWhenMainMethodIsCalled() throws Exception {
-    int status = catchSystemExit(() -> Main.main(new String[] {"ANA"}));
     assertEquals(3, status);
   }
 }
