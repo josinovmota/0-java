@@ -16,15 +16,15 @@ public class UserCommand {
       return;
     }
 
-    log.debug("Connecting to the repository");
+    log.info("Connecting to the repository");
     UserRepository repo = new UserRepository();
     repo.connect();
+    log.info("Connected to the repository");
 
     for (String username : usernames) {
       log.trace("Adding username: {}", username);
       User user = new User(username);
       Long id = repo.save(user);
-      // System.out.println("Username added: " + username + " (ID: " + id + ")");
       log.info("Username: {} added with ID: {}", username, id);
     }
   }
