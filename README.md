@@ -62,7 +62,7 @@ mvn clean install
 
 First of all be sure that you already downloaded the project (you can use the first part of the [Building the project](#building-the-project) in order to do that) so we can start doing the **unit tests**
 
-Now, with everything settled we can properly do the unit tests with its command:
+Now, with everything settled we can properly do the unit tests using the following command in the `terminal`:
 
 ```
 mvn test
