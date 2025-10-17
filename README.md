@@ -75,11 +75,13 @@ If there's any doubt about Apache Maven lifecycle, you can use the [explanation]
 To execute the project you can simply use the following command:
 
 Windows (PowerShell)
+
 ```
 mvn "exec:java" "-Dexec.args=<args separated with spaces>"
 ```
 
 Linux (Bash)
+
 ```
 mvn exec:java -Dexec.args="<args separated with spaces>"
 ```
