@@ -18,15 +18,12 @@ jobs:
       image: maven:3.8-openjdk-17-slim
 
     env:
-      MAVEN_CLI_OPTS: "--setting --batch-mode"
+      MAVEN_CLI_OPTS: "--settings --batch-mode"
       MAVEN_OPTS: "-Dmaven.repo.local=/github/home/.m2/repository"
 
     steps:
       - name: Download the Code
         uses: actions/checkout@v4
-
-      - name: Compile the project
-        run: mvn $(MAVEN_CLI_OPTS) clean install
 
       - name: Cache maven dependencies and plugins
         uses: actions/cache@v4
@@ -36,13 +33,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      - name: Compile the project
+        run: mvn $MAVEN_CLI_OPTS clean install
+
       - name: Upload the Site Artifact
         uses: actions/upload-artifact@v4
         with:
           name: maven-site
           path: target/site/
-      - name: Listar conteúdo do site gerado
-        run: ls -R target/site
 
   deploy:
     needs: build
