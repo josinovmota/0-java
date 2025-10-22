@@ -40,7 +40,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: maven-site
-          path: target/site
+          path: target/site/
+      - name: Listar conteúdo do site gerado
+        run: ls -R target/site
 
   deploy:
     needs: build
