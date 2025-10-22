@@ -19,7 +19,7 @@ jobs:
 
     env:
       MAVEN_CLI_OPTS: "--setting --batch-mode"
-      MAVEN_OPTS: "-Dmaven.repo.local=github/home/.m2/repository"
+      MAVEN_OPTS: "-Dmaven.repo.local=/github/home/.m2/repository"
 
     steps:
       - name: Download the Code
@@ -40,7 +40,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: maven-site
-          path: target/
+          path: target/site
 
   deploy:
     needs: build
