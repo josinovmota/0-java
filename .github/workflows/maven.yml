@@ -1,0 +1,22 @@
+name: Java CI with Maven
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: maven:3.8-openjdk-17-slim
+
+    env:
+      MAVEN_CLI_OPTS: "--setting --batch-mode"
+      MAVEN_OPTS: "-Dmaven.repo.local=github/home/.m2/repository"
+
+    steps:
+      - name: Download the Code
+        uses: actions/checkout@v4
+
+      - name: Compile the project
+        uses: mvn $(MAVEN_CLI_OPTS) clean install
