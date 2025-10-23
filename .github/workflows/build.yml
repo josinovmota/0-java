@@ -36,11 +36,11 @@ jobs:
       - name: Compile the project
         run: mvn $(MAVEN_CLI_OPTS) clean install
 
-      - name: Upload the Site Artifact
+      - name: Upload Target Directory as Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: maven-site
-          path: target/site/jacoco/
+          name: maven-target
+          path: target
 
   deploy:
     needs: build
@@ -49,9 +49,9 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: maven-site
-          path: ./jacoco
+          name: maven-target
+          path: /site/jacoco
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: ./jacoco
+          path: /site/jacoco
       - uses: actions/deploy-pages@v4
