@@ -68,7 +68,7 @@ Now, with everything settled we can properly do the unit tests using the followi
 mvn test
 ```
 
-If there's any doubt about Apache Maven lifecycle, you can use the [explanation](../exercises/maven-lifecycle.md) about its phases.
+If there's any doubt about Apache Maven Lifecycle, you can use the [explanation](../exercises/maven-lifecycle.md) about its phases.
 
 ## Executing the project
 
